@@ -1,0 +1,135 @@
+/* Author: Barlas Apaydin */
+
+/** -------------------------------------------
+    Support
+    ------------------------------------------- **/
+
+// Functions
+@function parseInt($n) { /* 2 */
+  @return $n / ($n * 0 + 1);
+}
+
+@mixin rem($property, $values) {
+  $px : (); /* 3 */
+  $rem: (); /* 3 */
+
+  @each $value in $values { /* 4 */
+
+    @if $value == 0 or $value == auto { /* 5 */
+      $px : append($px , $value);
+      $rem: append($rem, $value);
+    }
+
+    @else {
+      $unit: unit($value);    /* 6 */
+      $val: parseInt($value); /* 6 */
+
+      @if $unit == "px" {  /* 7 */
+        $px : append($px,  $value);
+        $rem: append($rem, ($val / 10 + rem));
+      }
+
+      @if $unit == "rem" { /* 7 */
+        $px : append($px,  ($val * 10 + px));
+        $rem: append($rem, $value);
+      }
+    }
+  }
+
+  @if $px == $rem {     /* 8 */
+    #{$property}: $px;  /* 9 */
+  } @else {
+    #{$property}: $px;  /* 9 */
+    #{$property}: $rem; /* 9 */
+  }
+}
+
+// Mixins
+@mixin linear-gradient($deg,$start,$end) {
+  background: $start;
+  background: -webkit-linear-gradient($deg,$start,$end);
+  background: -moz-linear-gradient($deg,$start,$end);
+  background: -o-linear-gradient($deg,$start,$end);
+  background: linear-gradient($deg,$start,$end);
+}
+@mixin box-shadow($value) {
+  -webkit-box-shadow: $value;
+     -moz-box-shadow: $value;
+          box-shadow: $value;
+}
+@mixin transform($value) {
+  -webkit-transform: $value;
+     -moz-transform: $value;
+       -o-transform: $value;
+      -ms-transform: $value;
+          transform: $value;
+}
+@mixin transition($value) {
+  -webkit-transition: $value;
+     -moz-transition: $value;
+       -o-transition: $value;
+      -ms-transition: $value;
+          transition: $value;
+}
+@mixin transition-delay($value) {
+  -webkit-transition-delay: $value;
+     -moz-transition-delay: $value;
+       -o-transition-delay: $value;
+      -ms-transition-delay: $value;
+          transition-delay: $value;
+}
+@mixin animation($value) {
+  -webkit-animation: $value;
+     -moz-animation: $value;
+       -o-animation: $value;
+          animation: $value;
+}
+@mixin keyframes($animationName) {
+  @-webkit-keyframes #{$animationName} {
+    @content;
+  }
+  @-moz-keyframes #{$animationName} {
+    @content;
+  }
+  @-o-keyframes #{$animationName} {
+    @content;
+  }
+  @keyframes #{$animationName} {
+    @content;
+  }
+}
+
+// Ready Classes
+.center-left {
+  left: 50%;
+  @include transform(translateX(-50%));
+}
+.flip-horizontal {
+  @include transform(rotateY(180deg));
+}
+.one-half {
+  float: left;
+  width: 50%;
+}
+.one-whole {
+  float: left;
+  width: 100%;
+}
+.before-wrapper {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+}
+.display-none { display: none; }
+
+.cf:before,
+.cf:after {
+  content: ' ';
+  display: table;
+}
+.cf:after {
+  clear: both;
+}

@@ -1,0 +1,451 @@
+/* Author: Barlas Apaydin */
+
+/** -------------------------------------------
+    CORE
+    ------------------------------------------- **/
+
+$base-font-size   : 13px;
+$grid-w           : 960px;
+$fixed-w          : 474px;
+
+$color-text       : #636e74;
+$color-dark-gray  : #32393d;
+$color-light-gray : #e9edef;
+$color-primary    : #0899e3;
+$color-secondary  : #34c57a;
+
+html {
+  font-size: 62.5%;
+}
+body {
+  font-family: 'proxima_nova_regular', arial, sans-serif;
+  color: $color-text;
+  background: #fff;
+  overflow-x: hidden;
+  overflow-y: scroll;
+  @include rem(font-size,13px);
+}
+h1, h2, h3, h4, h5, h6, p, b, strong { font-weight : normal;  }
+body *, :before, :after {
+  box-sizing: border-box;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+:focus { outline: none; }
+b, strong {
+  font-family: 'proxima_nova_bold';
+}
+a {
+  color: $color-primary;
+  &:hover {
+    text-decoration: none;
+    color: darken($color-primary,20%);
+  }
+}
+
+#wrapper {
+  display: none;
+  min-width: $fixed-w;
+}
+
+#wrapper,
+#content,
+.page,
+section {
+  position: relative;
+  background: #fff;
+}
+.grid {
+  width: $grid-w;
+  height: 100%;
+  margin: 0 auto;
+  position: relative;
+}
+.wrapped-mask {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+/** -------------------------------------------
+    ELEMENTS
+    ------------------------------------------- **/
+h1 {
+  font-family: 'proxima_nova_light';
+  @include rem(font-size,48px);
+  @include rem(line-height,52px);
+}
+h2 {
+  font-family: 'proxima_nova_light';
+  @include rem(font-size,32px);
+  @include rem(line-height,36px);
+}
+h3 {
+  font-family: 'proxima_nova_regular';
+  @include rem(font-size,26px);
+  @include rem(line-height,28px);
+}
+h4 {
+  font-family: 'proxima_nova_bold';
+  @include rem(font-size,20px);
+  @include rem(line-height,22px);
+}
+h5 {
+  font-family: 'proxima_nova_regular';
+  @include rem(font-size,16px);
+  @include rem(line-height,18px);
+}
+h6 {
+  font-family: 'proxima_nova_regular';
+  @include rem(font-size,16px);
+  @include rem(line-height,18px);
+  color: #8899a6;
+}
+h6.small {
+  font-family: 'proxima_nova_regular';
+  @include rem(font-size,14px);
+  @include rem(line-height,18px);
+  color: #8899a6;
+}
+
+/** -------------------------------------------
+    BUTTONS
+    ------------------------------------------- **/
+.button {
+  display: inline-block;
+  width: 167px;
+  height: 32px;
+  text-align: center;
+  vertical-align: top;
+  cursor: pointer;
+  border-radius: 2px;
+  @include rem(font-size,13px);
+  @include rem(line-height,32px);
+  color: #fff;
+  text-decoration: none;
+  border: 1px solid #0c84bb;
+  @include linear-gradient(180deg,#0ea7e7,#089ae3);
+  @include box-shadow(1px 1px 0 0 #0c84bb);
+  &:hover {
+    color: #fff;
+    @include linear-gradient(180deg,#24a7ea,#24a7ea);
+  }
+  &:active {
+    @include linear-gradient(180deg,#0c84bb,#0c84bb);
+  }
+  &.green {
+    border: 1px solid #2fac6b;
+    @include linear-gradient(180deg,#47cd8b,#35c57b);
+    @include box-shadow(1px 1px 0 0 #2fac6b);
+    &:hover {
+      color: #fff;
+      @include linear-gradient(180deg,#3bd786,#3bd786);
+    }
+    &:active {
+      @include linear-gradient(180deg,#2fac6b,#2fac6b);
+    }
+  }
+  &.lined {
+    @include linear-gradient(180deg,transparent,transparent);
+    @include box-shadow(none);
+    color: $color-primary;
+    border: 1px solid rgba(25,144,205,.5);
+    &:hover { border: 1px solid rgba(25,144,205,1); }
+    &:active { border: 1px solid rgba(25,144,205,.2); }
+    &.white {
+      color: #fff;
+      border: 1px solid rgba(255,255,255,.5);
+      &:hover { border: 1px solid rgba(255,255,255,1); }
+      &:active { border: 1px solid rgba(255,255,255,.2); }
+    }
+  }
+}
+
+/** -------------------------------------------
+    HEADER
+    ------------------------------------------- **/
+#header {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 83px;
+  background: #fff;
+  border-top: 5px solid #e5ebee;
+  font-size: 0;
+  div > nav {
+    display: inline-block;
+    position: relative;
+    margin-left: 16px;
+    vertical-align: top;
+    a, s {
+      @include rem(font-size,13px);
+      text-decoration: none;
+    }
+  }
+  .button {
+    width: 100px;
+    margin: 27px 12px 0 0;
+    &:last-child { margin-right: 0; }
+  }
+}
+#header.home {
+  position: absolute;
+  top: 55px;
+  background: transparent;
+  border: none;
+  .button.lined {
+    @extend .button.lined.white;
+  }
+  .logo {
+    @extend .logo.white;
+  }
+  nav#main a,
+  nav#lang a,
+  nav#lang s {
+    color: #fff;
+    opacity: 1;
+  }
+  nav#main {
+    @include rem(line-height,32px);
+    height: 32px;
+    margin-top: 27px;
+    a {
+      padding: 0 14px;
+      border: 1px solid transparent;
+      border-radius: 2px;
+      &:hover {
+        opacity: 1;
+        background: transparent;
+        border: 1px solid rgba(255,255,255,0.5);
+        &:before { opacity: 0; }
+      }
+      &:active {
+        border: 1px solid rgba(255,255,255,1);
+      }
+    }
+  }
+}
+.logo {
+  display: inline-block;
+  height: 78px;
+  @include rem(font-size,36px);
+  @include rem(line-height,78px);
+  font-family: 'Raleway', sans-serif;
+  font-weight: 800;
+  text-decoration: none;
+  s, i {
+    font-style: normal;
+    text-decoration: none;
+  }
+  s { color: #394147; }
+  i { color: #34c57a; }
+  &:hover {
+    s { color: #34c57a; }
+    i { color: #394147; }
+  }
+  &.white {
+    s { color: #fff; }
+    i { color: #34c57a; }
+    &:hover {
+      s { color: #34c57a; }
+      i { color: #fff; }
+    }
+  }
+}
+nav#main {
+  @include rem(line-height,78px);
+  height: 78px;
+  a {
+    position: relative;
+    display: inline-block;
+    padding: 5px 15px;
+    height: 100%;
+    color: #7c8184;
+    opacity: .6;
+    &:before {
+      opacity: 0;
+      @extend .before-wrapper;
+      height: 5px;
+      background: $color-primary;
+      top: -5px;
+    }
+    &:hover {
+      opacity: 1;
+      background: #f7f9fa;
+      &:before { opacity: 1; }
+    }
+  }
+}
+nav#lang {
+  width: 44px;
+  @include rem(line-height,32px);
+  margin-top: 28px;
+  margin-right: 16px;
+  a, s {
+    color: #7c8184;
+    opacity: .6;
+    display: block;
+    cursor: default;
+  }
+  a {
+    &.active {
+      color: #333536;
+    }
+    &.active:hover { opacity: .6; }
+    &:hover { opacity: 1; }
+  }
+  nav {
+    display: none;
+    width: 100%;
+    position: absolute;
+    left: 0;
+    top: 26px;
+    @include rem(line-height,16px);
+    a {
+      cursor: pointer;
+      &:hover { text-decoration: underline; }
+    }
+  }
+  &:hover nav {
+    display: inline-block;
+  }
+  s {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+}
+/** -------------------------------------------
+    HOME SECTIONS
+    ------------------------------------------- **/
+#sec-landing {
+  .bg {
+    position: absolute;
+    left: 0;
+    top: 0;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 100%;
+    height: 100%;
+    &:before {
+      @extend .before-wrapper;
+      background: rgba(0,0,0,.25);
+    }
+    &:after {
+      @extend .before-wrapper;
+      @include linear-gradient(180deg,#000,transparent);
+      height: 40%;
+    }
+  }
+  .text-welcome {
+    position: absolute;
+    top: 10%;
+    left: 0;
+    width: 100%;
+    height: 90%;
+    text-align: center;
+    display: table;
+    .caption {
+      display: table-cell;
+      vertical-align: middle;
+      > * {
+        position: relative;
+        display: block;
+        color: #fff;
+      }
+    }
+    b {
+      font-family: 'avenir_next_ltpro_bold';
+      font-weight: normal;
+      @include rem(font-size,48px);
+      @include rem(line-height,52px);
+      text-shadow: 0 1px 0 rgba(0,0,0,.6);
+      margin-bottom: 10px;
+    }
+    i {
+      font-family: 'avenir_next_ltpro_regular';
+      font-style: normal;
+      @include rem(font-size,36px);
+      @include rem(line-height,40px);
+      text-shadow: 0 1px 0 rgba(0,0,0,.6);
+      margin-bottom: 20px;
+    }
+    .button {
+      display: inline-block;
+      width: 324px;
+      height: 40px;
+      @include rem(font-size,14px);
+      @include rem(line-height,40px);
+      text-shadow: 0 1px 0 rgba(24,168,53,.6);
+    }
+    .badge {
+      position: absolute;
+      right: -236px;
+      bottom: -166px;
+      pointer-events: none;
+    }
+  }
+}
+#sec-how-it-works {
+  background: #fff;
+  text-align: center;
+  font-size: 0;
+  margin: 50px 0 80px;
+  h2 {
+    font-family: 'avenir_next_ltpro_bold';
+    color: #394147;
+  }
+  .thumbs {
+    margin-bottom: 20px;
+    .thumb {
+      display: inline-block;
+      width: 30%;
+      margin: 0 2.5%;
+      &:first-child { margin-left: 0; }
+      &:last-child { margin-right: 0; }
+    }
+    b {
+      @include rem(font-size,20px);
+      color: #394147;
+    }
+    p {
+      @include rem(font-size,14px);
+      color: #6f7a83;
+    }
+  }
+  .link {
+    @include rem(font-size,13px);
+    text-decoration: none;
+  }
+}
+#sec-not-ready {
+
+}
+
+/** -------------------------------------------
+    TRANSITIONS
+    ------------------------------------------- **/
+#header,
+.logo i,
+.logo s,
+.button,
+nav#main a,
+nav#main a:before,
+nav#lang a {
+  @include transition(all .2s linear);
+}
+/*
+.ships .light,
+.ships:hover h2 {
+  @include transition-delay(.2s);
+}
+.ships:hover .light,
+.ships h2 {
+  @include transition-delay(0s);
+}
+*/
