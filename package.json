@@ -3,13 +3,18 @@
   "version": "1.0.0",
   "description": "javascript gulpjs html5 css3 sass boilerplate beginner guide.",
   "main": "gulpfile.js",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:barlas/front-end-starter-kit.git"
+  },
+  "author": "Barlas Apaydin",
+  "license": "*",
   "devDependencies": {
     "browser-sync": "^2.11.1",
     "gulp": "^3.9.0",
-    "gulp-sourcemaps": "^1.6.0",
     "gulp-sass": "^2.1.1",
-    "gulp-watch": "^4.3.5",
-    "gulp-uglifyjs": "^0.6.2"
-  },
-  "author": "Barlas Apaydin"
+    "gulp-sourcemaps": "^1.6.0",
+    "gulp-uglifyjs": "^0.6.2",
+    "gulp-watch": "^4.3.5"
+  }
 }

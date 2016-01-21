@@ -7,13 +7,13 @@ var gulp        = require('gulp'),
 
 var paths = {
     ext: [
-        'assets/scripts/vendors/jquery-2.2.0.min.js'
+        'src/assets/scripts/externals/jquery-2.2.0.min.js'
     ],
     app: [
-        'assets/scripts/app/app.js'
+        'src/assets/scripts/app/app.js'
     ],
     styles: [
-        'assets/styles/styles.scss'
+        'src/assets/styles/styles.scss'
     ]
 };
 
@@ -27,16 +27,9 @@ gulp.task('browser-sync', function() {
 
 // Scripts Task
 gulp.task('externals', function() {
-    return gulp.src(paths.ext,{
-            mangle          : false,
-            outSourceMap    : true,
-            sourceRoot      : '../../',
-            output          : {
-
-            }
-        })
+    return gulp.src(paths.ext)
         .pipe(uglify('ext.min.js'))
-        .pipe(gulp.dest('./assets/scripts/'));
+        .pipe(gulp.dest('./src/assets/scripts/'));
 });
 gulp.task('scripts', function(){
     gulp.src(paths.app)
@@ -52,7 +45,7 @@ gulp.task('scripts', function(){
                 }
             }
         }))
-        .pipe(gulp.dest('./assets/scripts/'))
+        .pipe(gulp.dest('./src/assets/scripts/'))
         .pipe(browserSync.stream());
 });
 
@@ -65,7 +58,7 @@ gulp.task('styles', function() {
             outputStyle     : 'compressed'
         }))
         //.pipe(sourcemaps.write('./'))
-        .pipe(gulp.dest('./assets/styles/'))
+        .pipe(gulp.dest('./src/assets/styles/'))
         .pipe(browserSync.stream());
 });
 
